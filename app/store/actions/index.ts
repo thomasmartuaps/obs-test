@@ -23,6 +23,18 @@ export type UserAction =
       };
     }
   | {
+      type: "SET_USER_DETAIL";
+      payload: {
+        user: User;
+      };
+    }
+  | {
+      type: "SET_LOADING";
+      payload: {
+        isLoading: boolean;
+      };
+    }
+  | {
       type: "SET_USERS";
       payload: {
         users: Array<User>;

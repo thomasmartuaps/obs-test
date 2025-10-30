@@ -10,9 +10,10 @@ interface UserListRowProps {
     username: string;
     email: string;
   };
+  isMock?: boolean;
 }
 
-export function UserListRow({ data }: UserListRowProps) {
+export function UserListRow({ data, isMock }: UserListRowProps) {
   const [modalOpen, setModalOpen] = useState(false);
   function viewDetails(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault;
@@ -22,19 +23,35 @@ export function UserListRow({ data }: UserListRowProps) {
     setModalOpen(false);
   }
   return (
-    <tr>
+    <tr className={isMock ? "animate-pulse" : ""}>
       {" "}
       <td className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">
-        {data.name}
+        {isMock ? (
+          <div className="h-2 rounded bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
+        ) : (
+          data.name
+        )}
       </td>{" "}
       <td className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">
-        {data.username}
+        {isMock ? (
+          <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
+        ) : (
+          data.username
+        )}
       </td>{" "}
       <td className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">
-        {data.email}
+        {isMock ? (
+          <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
+        ) : (
+          data.email
+        )}
       </td>{" "}
       <td className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">
-        <Button buttonText={"Details"} onClick={viewDetails} />
+        {isMock ? (
+          <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
+        ) : (
+          <Button buttonText={"Details"} onClick={viewDetails} />
+        )}
       </td>{" "}
       <Modal
         open={modalOpen}

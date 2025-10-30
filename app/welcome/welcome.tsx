@@ -5,9 +5,11 @@ import { Button } from "~/components/button";
 import { UserDetailsModal } from "~/components/user-details-modal";
 import { Modal } from "@mui/material";
 import { useState } from "react";
+import { useAppSelector } from "~/store/hooks";
 
 export function Welcome() {
   const [modalOpen, setModalOpen] = useState(false);
+  const usersData = useAppSelector((state) => state.users);
 
   function showAddModal(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault;
@@ -38,7 +40,11 @@ export function Welcome() {
           <Userlist />
         </div>
         <div className="max-w-2xl mb-6 w-full px-4 ">
-          <Button buttonText={"Add User"} onClick={showAddModal} />
+          <Button
+            buttonText={"Add User"}
+            onClick={showAddModal}
+            isLoading={usersData.isLoading}
+          />
           <Modal
             open={modalOpen}
             onClose={handleClose}

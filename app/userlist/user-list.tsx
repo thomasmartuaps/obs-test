@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "~/components/button";
 import { UserListRow } from "~/components/user-list-row";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
+import type { User } from "~/store/reducers";
 
 const fakeUserList = [
   {
@@ -34,7 +35,7 @@ const tableHeadClass =
   "w-1/2 border border-gray-300 p-4 text-left font-semibold text-gray-900 dark:border-gray-600 dark:text-gray-200";
 
 export default function Userlist() {
-  const [userList, setUserList] = useState(fakeUserList);
+  const [userList, setUserList] = useState<User[]>([]);
   const dispatch = useAppDispatch();
   const usersData = useAppSelector((state) => state.users);
 
@@ -50,6 +51,7 @@ export default function Userlist() {
 
   useEffect(() => {
     console.log("SET USERS");
+    console.log(usersData.isLoading, "CHECK ISLOADING");
     setUserList(usersData.users);
   }, [usersData, setUserList]);
 
@@ -67,11 +69,19 @@ export default function Userlist() {
             <th className={tableHeadClass}>Actions</th>{" "}
           </tr>{" "}
         </thead>{" "}
-        <tbody>
-          {userList.map((data) => {
-            return <UserListRow data={data} />;
-          })}{" "}
-        </tbody>
+        {usersData.isLoading ? (
+          <tbody>
+            {fakeUserList.map((data) => {
+              return <UserListRow data={data} isMock />;
+            })}
+          </tbody>
+        ) : (
+          <tbody>
+            {userList.map((data) => {
+              return <UserListRow data={data} />;
+            })}{" "}
+          </tbody>
+        )}
       </table>
     </div>
   );

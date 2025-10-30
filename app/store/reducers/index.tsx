@@ -49,10 +49,14 @@ export interface User {
 
 interface UsersState {
   users: Array<User>;
+  isLoading: boolean;
+  currentUser: User | null;
 }
 
 const initUsersState: UsersState = {
   users: [],
+  isLoading: false,
+  currentUser: null,
 };
 
 export function jobslightReducer(state = initUsersState, action: UserAction) {
@@ -61,11 +65,25 @@ export function jobslightReducer(state = initUsersState, action: UserAction) {
     case "FETCH_USERS":
       return {
         ...state,
+        isLoading: true,
+      };
+    case "SET_LOADING":
+      return {
+        ...state,
+        isLoading: payload.isLoading,
+      };
+    case "SET_USER_DETAIL":
+      return {
+        ...state,
+        currentUser: payload.user,
+        isLoading: false,
       };
     case "SET_USERS":
+      console.log(state.isLoading, "CHECK ISLOADING FROM REDUCER");
       return {
         ...state,
         users: payload.users,
+        isLoading: false,
       };
     default:
       return state;
