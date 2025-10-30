@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "~/components/button";
 import { UserListRow } from "~/components/user-list-row";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 const fakeUserList = [
   {
@@ -34,9 +35,26 @@ const tableHeadClass =
 
 export default function Userlist() {
   const [userList, setUserList] = useState(fakeUserList);
+  const dispatch = useAppDispatch();
+  const usersData = useAppSelector((state) => state.users);
+
+  useEffect(() => {
+    console.log("FETCH USERS ON PAGE LOAD");
+    dispatch({
+      type: "FETCH_USERS",
+      payload: {
+        query: "",
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log("SET USERS");
+    setUserList(usersData.users);
+  }, [usersData, setUserList]);
 
   return (
-    <div className="px-4 py-8 sm:px-8 not-prose rounded-lg bg-white outline outline-white/5 dark:bg-gray-950/50">
+    <div className="px-4 sm:px-8 not-prose rounded-lg bg-white outline outline-white/5 dark:bg-gray-950/50">
       <table className="w-full border-collapse border border-gray-400 bg-white text-sm dark:border-gray-500 dark:bg-gray-800">
         {" "}
         <thead className="bg-gray-50 dark:bg-gray-700">
