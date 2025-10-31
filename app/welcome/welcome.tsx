@@ -1,6 +1,5 @@
 import Userlist from "~/userlist/user-list";
-import logoDark from "./logo-dark.svg";
-import logoLight from "./logo-light.svg";
+import logo from "./obs-logo.png";
 import { Button } from "~/components/button";
 import { UserDetailsModal } from "~/components/user-details-modal";
 import { Modal } from "@mui/material";
@@ -22,15 +21,10 @@ export function Welcome() {
     <main className="flex items-center justify-center pt-16 pb-4">
       <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
         <header className="flex flex-col items-center gap-9">
-          <div className="w-[500px] max-w-[100vw] p-4">
+          <div className="w-[200px] max-w-[50vw] p-4">
             <img
-              src={logoLight}
-              alt="React Router"
-              className="block w-full dark:hidden"
-            />
-            <img
-              src={logoDark}
-              alt="React Router"
+              src={logo}
+              alt="Company Logo"
               className="hidden w-full dark:block"
             />
           </div>
