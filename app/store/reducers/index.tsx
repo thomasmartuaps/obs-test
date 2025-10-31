@@ -98,6 +98,13 @@ export function jobslightReducer(state = initUsersState, action: UserAction) {
         users: newUsers,
         isLoading: false,
       };
+    case "DELETE_USER":
+      const deletedUser = state.users.filter((val) => val.id !== payload.id);
+      return {
+        ...state,
+        users: deletedUser,
+        isLoading: false,
+      };
     case "SET_USERS":
       console.log(state.isLoading, "CHECK ISLOADING FROM REDUCER");
       return {

@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "./button";
 import { UserDetailsForm } from "./user-details-form";
 import type { User } from "~/store/reducers";
 import { useAppDispatch } from "~/store/hooks";
+import { Modal } from "@mui/material";
 
 interface UserDetailsModalProps {
   id?: number;
@@ -20,10 +21,8 @@ interface UserDetails {
 
 export function UserDetailsModal({ id, handleClose }: UserDetailsModalProps) {
   const dispatch = useAppDispatch();
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
-  function viewDetails(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.preventDefault;
-  }
   function handleSubmitEdit(user: User) {
     console.log("SUBMITTING");
     console.log(user, "BEFORE SUBMIT");
@@ -45,7 +44,23 @@ export function UserDetailsModal({ id, handleClose }: UserDetailsModalProps) {
     }
     handleClose();
   }
-  function handleDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {}
+  function confirmDelete() {
+    setDeleteModalOpen(true);
+  }
+  function handleDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
+    dispatch({
+      type: "DELETE_USER",
+      payload: {
+        id,
+      },
+    });
+    setDeleteModalOpen(false);
+    handleClose();
+  }
+  function cancelDelete() {
+    setDeleteModalOpen(false);
+  }
   return (
     <div className="max-w-screen w-full space-y-6 " role="dialog">
       <div
@@ -63,11 +78,27 @@ export function UserDetailsModal({ id, handleClose }: UserDetailsModalProps) {
           </div>
           <div className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400 space-x-6">
             {id ? (
-              <Button buttonText={"Delete"} color="red" onClick={viewDetails} />
+              <Button
+                buttonText={"Delete"}
+                color="red"
+                onClick={confirmDelete}
+              />
             ) : null}
             <Button buttonText={"Close"} onClick={handleClose} />
           </div>
         </div>
+        <Modal
+          open={deleteModalOpen}
+          onClose={cancelDelete}
+          aria-labelledby="child-modal-title"
+          aria-describedby="child-modal-description"
+        >
+          <div>
+            <p>are you sure you want to delete this user?</p>
+            <Button buttonText={"Yes"} color="red" onClick={handleDelete} />
+            <Button buttonText={"No"} color="indigo" onClick={cancelDelete} />
+          </div>
+        </Modal>
       </div>
     </div>
   );

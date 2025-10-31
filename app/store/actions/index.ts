@@ -47,6 +47,12 @@ export type UserAction =
       };
     }
   | {
+      type: "DELETE_USER";
+      payload: {
+        id: number;
+      };
+    }
+  | {
       type: "SET_USERS";
       payload: {
         users: Array<User>;
