@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Button } from "./button";
 import { UserDetailsForm } from "./user-details-form";
+import type { User } from "~/store/reducers";
 
 interface UserDetailsModalProps {
   id?: number;
@@ -17,16 +18,12 @@ interface UserDetails {
 }
 
 export function UserDetailsModal({ id, handleClose }: UserDetailsModalProps) {
-  const formRef = useRef(() => {});
   function viewDetails(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault;
   }
-  function handleSubmitEdit(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
+  function handleSubmitEdit(user: User) {
     console.log("SUBMITTING");
-
-    e.preventDefault;
+    console.log(user, "BEFORE SUBMIT");
   }
   function handleDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {}
   return (
@@ -42,15 +39,12 @@ export function UserDetailsModal({ id, handleClose }: UserDetailsModalProps) {
             </h5>
           </div>
           <div className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">
-            <UserDetailsForm id={id} />
+            <UserDetailsForm id={id} handleSubmitUser={handleSubmitEdit} />
           </div>
           <div className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400 space-x-6">
-            <Button
-              buttonText={"Save"}
-              color={"indigo"}
-              onClick={handleSubmitEdit}
-            />
-            {id ? <Button buttonText={"Delete"} onClick={viewDetails} /> : null}
+            {id ? (
+              <Button buttonText={"Delete"} color="red" onClick={viewDetails} />
+            ) : null}
             <Button buttonText={"Close"} onClick={handleClose} />
           </div>
         </div>

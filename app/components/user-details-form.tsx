@@ -5,44 +5,54 @@ import { Button } from "./button";
 
 interface UserDetailsFormProps {
   id?: number;
+  handleSubmitUser: (user: User) => void;
 }
 
-export function UserDetailsForm({ id }: UserDetailsFormProps) {
-  const [user, setUser] = useState<User | null>(null);
+export function UserDetailsForm({
+  id,
+  handleSubmitUser,
+}: UserDetailsFormProps) {
   const usersData = useAppSelector((state) => state.users);
+  const [user, setUser] = useState<User>({
+    id: Math.max(...usersData.users.map((val) => val.id)) + 1,
+    name: "",
+    username: "",
+    email: "",
+    phone: "",
+    website: "",
+  });
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    console.log("CHANGING USER DATA TO SUBMIT");
     e.preventDefault();
     const labels = Array.from(e.target.labels || []);
     if (user) {
       setUser({
         ...user,
-        [labels?.[0].innerText]: e.target.value ?? "",
+        [labels?.[0].innerText.toLowerCase()]: e.target.value ?? "",
       });
     }
   }
 
-  useEffect(() => {
-    const currentUser = usersData.users.find((val) => val.id === id);
-    setUser(
-      currentUser ?? {
-        id: Math.max(...usersData.users.map((val) => val.id)) + 1,
-        name: "",
-        username: "",
-        email: "",
-        phone: "",
-        website: "",
-      }
-    );
-  }, [id, setUser, usersData]);
-
-  function onChangeForm(e: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
-    console.log(e.target, "HI");
+    handleSubmitUser(user);
   }
 
+  useEffect(() => {
+    const currentUser = usersData.users.find((val) => val.id === id);
+    if (currentUser) {
+      setUser(currentUser);
+    }
+  }, [id, setUser, usersData]);
+
+  /*   function onChangeForm(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    console.log(e.target, "HI");
+  } */
+
   return (
-    <form onChange={onChangeForm}>
+    <form /* onChange={onChangeForm} */>
       <div className="space-y-12">
         <div className="border-b border-white/10 pb-12">
           <h2 className="text-base/7 font-semibold text-white">Profile</h2>
@@ -89,6 +99,7 @@ export function UserDetailsForm({ id }: UserDetailsFormProps) {
                     name="email"
                     placeholder="Jane"
                     defaultValue={user?.name}
+                    onChange={handleInputChange}
                     className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                   />
                 </div>
@@ -107,6 +118,8 @@ export function UserDetailsForm({ id }: UserDetailsFormProps) {
                     type="email"
                     name="email"
                     autoComplete="email"
+                    defaultValue={user?.email}
+                    onChange={handleInputChange}
                     className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                   />
                 </div>
@@ -124,6 +137,8 @@ export function UserDetailsForm({ id }: UserDetailsFormProps) {
                     id="phone"
                     type="phone"
                     name="phone"
+                    defaultValue={user?.phone}
+                    onChange={handleInputChange}
                     className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                   />
                 </div>
@@ -141,12 +156,17 @@ export function UserDetailsForm({ id }: UserDetailsFormProps) {
                     id="website"
                     type="text"
                     name="website"
+                    defaultValue={user?.website}
+                    onChange={handleInputChange}
                     className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                   />
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div className="mt-6 flex items-center justify-start gap-x-6">
+          <Button buttonText={"Save"} color={"indigo"} onClick={onSubmit} />
         </div>
       </div>
     </form>

@@ -63,13 +63,37 @@ export default function Userlist() {
           {" "}
           <tr>
             {" "}
-            <th className={tableHeadClass}>Name</th>{" "}
-            <th className={tableHeadClass}>Username</th>{" "}
-            <th className={tableHeadClass}>Email</th>{" "}
-            <th className={tableHeadClass}>Actions</th>{" "}
+            <th className={tableHeadClass}>
+              {userList.length === 0 ? (
+                <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
+              ) : (
+                "Name"
+              )}
+            </th>{" "}
+            <th className={tableHeadClass}>
+              {userList.length === 0 ? (
+                <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
+              ) : (
+                "Username"
+              )}
+            </th>{" "}
+            <th className={tableHeadClass}>
+              {userList.length === 0 ? (
+                <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
+              ) : (
+                "Email"
+              )}
+            </th>{" "}
+            <th className={tableHeadClass}>
+              {userList.length === 0 ? (
+                <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
+              ) : (
+                "Actions"
+              )}
+            </th>{" "}
           </tr>{" "}
         </thead>{" "}
-        {usersData.isLoading ? (
+        {userList.length === 0 ? (
           <tbody>
             {fakeUserList.map((data) => {
               return <UserListRow data={data} isMock />;
