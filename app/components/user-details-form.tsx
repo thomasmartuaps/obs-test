@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "~/store/hooks";
 import type { User } from "~/store/reducers";
+import { Button } from "./button";
 
 interface UserDetailsFormProps {
   id?: number;
@@ -10,13 +11,38 @@ export function UserDetailsForm({ id }: UserDetailsFormProps) {
   const [user, setUser] = useState<User | null>(null);
   const usersData = useAppSelector((state) => state.users);
 
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
+    const labels = Array.from(e.target.labels || []);
+    if (user) {
+      setUser({
+        ...user,
+        [labels?.[0].innerText]: e.target.value ?? "",
+      });
+    }
+  }
+
   useEffect(() => {
     const currentUser = usersData.users.find((val) => val.id === id);
-    setUser(currentUser ?? null);
+    setUser(
+      currentUser ?? {
+        id: Math.max(...usersData.users.map((val) => val.id)) + 1,
+        name: "",
+        username: "",
+        email: "",
+        phone: "",
+        website: "",
+      }
+    );
   }, [id, setUser, usersData]);
 
+  function onChangeForm(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    console.log(e.target, "HI");
+  }
+
   return (
-    <form>
+    <form onChange={onChangeForm}>
       <div className="space-y-12">
         <div className="border-b border-white/10 pb-12">
           <h2 className="text-base/7 font-semibold text-white">Profile</h2>
@@ -43,6 +69,7 @@ export function UserDetailsForm({ id }: UserDetailsFormProps) {
                     name="username"
                     placeholder="janesmith"
                     defaultValue={user?.username}
+                    onChange={handleInputChange}
                     className="block min-w-0 grow bg-transparent py-1.5 pr-3 pl-1 text-base text-white placeholder:text-gray-500 focus:outline-none sm:text-sm/6"
                   />
                 </div>

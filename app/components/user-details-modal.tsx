@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { Button } from "./button";
 import { UserDetailsForm } from "./user-details-form";
 
@@ -16,7 +17,15 @@ interface UserDetails {
 }
 
 export function UserDetailsModal({ id, handleClose }: UserDetailsModalProps) {
+  const formRef = useRef(() => {});
   function viewDetails(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault;
+  }
+  function handleSubmitEdit(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
+    console.log("SUBMITTING");
+
     e.preventDefault;
   }
   function handleDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {}
@@ -36,7 +45,11 @@ export function UserDetailsModal({ id, handleClose }: UserDetailsModalProps) {
             <UserDetailsForm id={id} />
           </div>
           <div className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400 space-x-6">
-            <Button buttonText={"Save"} onClick={viewDetails} />
+            <Button
+              buttonText={"Save"}
+              color={"indigo"}
+              onClick={handleSubmitEdit}
+            />
             {id ? <Button buttonText={"Delete"} onClick={viewDetails} /> : null}
             <Button buttonText={"Close"} onClick={handleClose} />
           </div>

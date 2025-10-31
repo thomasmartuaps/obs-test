@@ -7,6 +7,7 @@ interface UserAddModalProps {
 
 export function UserAddModal({ handleClose }: UserAddModalProps) {
   function handleSubmitAdd(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    console.log("SUBMITTING");
     e.preventDefault;
   }
   return (
@@ -23,7 +24,11 @@ export function UserAddModal({ handleClose }: UserAddModalProps) {
             <UserDetailsForm />
           </div>
           <div className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400 space-x-6">
-            <Button buttonText={"Add"} onClick={handleSubmitAdd} />
+            <Button
+              buttonText={"Save"}
+              color={"indigo"}
+              onClick={handleSubmitAdd}
+            />
             <Button buttonText={"Close"} onClick={handleClose} />
           </div>
         </div>
