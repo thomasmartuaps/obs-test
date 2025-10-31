@@ -35,6 +35,18 @@ export type UserAction =
       };
     }
   | {
+      type: "EDIT_USER";
+      payload: {
+        user: User;
+      };
+    }
+  | {
+      type: "ADD_USER";
+      payload: {
+        user: User;
+      };
+    }
+  | {
       type: "SET_USERS";
       payload: {
         users: Array<User>;

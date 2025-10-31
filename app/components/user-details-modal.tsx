@@ -2,10 +2,11 @@ import { useRef } from "react";
 import { Button } from "./button";
 import { UserDetailsForm } from "./user-details-form";
 import type { User } from "~/store/reducers";
+import { useAppDispatch } from "~/store/hooks";
 
 interface UserDetailsModalProps {
   id?: number;
-  handleClose: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  handleClose: () => void;
 }
 
 interface UserDetails {
@@ -18,12 +19,31 @@ interface UserDetails {
 }
 
 export function UserDetailsModal({ id, handleClose }: UserDetailsModalProps) {
+  const dispatch = useAppDispatch();
+
   function viewDetails(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault;
   }
   function handleSubmitEdit(user: User) {
     console.log("SUBMITTING");
     console.log(user, "BEFORE SUBMIT");
+    if (id === user.id) {
+      dispatch({
+        type: "EDIT_USER",
+        payload: {
+          user,
+        },
+      });
+    } else {
+      console.log("ADD NEW USER");
+      dispatch({
+        type: "ADD_USER",
+        payload: {
+          user,
+        },
+      });
+    }
+    handleClose();
   }
   function handleDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {}
   return (

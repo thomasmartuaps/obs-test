@@ -78,6 +78,26 @@ export function jobslightReducer(state = initUsersState, action: UserAction) {
         currentUser: payload.user,
         isLoading: false,
       };
+    case "EDIT_USER":
+      const newUser = payload.user;
+      const usersList = state.users.map((val) => {
+        if (newUser.id === val.id) {
+          return newUser;
+        }
+        return val;
+      });
+      return {
+        ...state,
+        users: usersList,
+        isLoading: false,
+      };
+    case "ADD_USER":
+      const newUsers = [...state.users, payload.user];
+      return {
+        ...state,
+        users: newUsers,
+        isLoading: false,
+      };
     case "SET_USERS":
       console.log(state.isLoading, "CHECK ISLOADING FROM REDUCER");
       return {

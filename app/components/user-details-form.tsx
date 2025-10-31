@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppSelector } from "~/store/hooks";
 import type { User } from "~/store/reducers";
 import { Button } from "./button";
@@ -12,6 +12,7 @@ export function UserDetailsForm({
   id,
   handleSubmitUser,
 }: UserDetailsFormProps) {
+  const formRef = useRef<HTMLFormElement | null>(null);
   const usersData = useAppSelector((state) => state.users);
   const [user, setUser] = useState<User>({
     id: Math.max(...usersData.users.map((val) => val.id)) + 1,
@@ -25,11 +26,10 @@ export function UserDetailsForm({
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     console.log("CHANGING USER DATA TO SUBMIT");
     e.preventDefault();
-    const labels = Array.from(e.target.labels || []);
     if (user) {
       setUser({
         ...user,
-        [labels?.[0].innerText.toLowerCase()]: e.target.value ?? "",
+        [e.target.name]: e.target.value ?? "",
       });
     }
   }
@@ -37,6 +37,9 @@ export function UserDetailsForm({
   function onSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
     handleSubmitUser(user);
+    if (formRef.current) {
+      formRef.current.reset();
+    }
   }
 
   useEffect(() => {
@@ -52,7 +55,7 @@ export function UserDetailsForm({
   } */
 
   return (
-    <form /* onChange={onChangeForm} */>
+    <form ref={formRef} /* onChange={onChangeForm} */>
       <div className="space-y-12">
         <div className="border-b border-white/10 pb-12">
           <h2 className="text-base/7 font-semibold text-white">Profile</h2>
@@ -96,7 +99,7 @@ export function UserDetailsForm({
                   <input
                     id="name"
                     type="name"
-                    name="email"
+                    name="name"
                     placeholder="Jane"
                     defaultValue={user?.name}
                     onChange={handleInputChange}
