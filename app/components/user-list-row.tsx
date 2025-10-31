@@ -26,32 +26,25 @@ export function UserListRow({ data, isMock }: UserListRowProps) {
   return (
     <tr className={isMock ? "animate-pulse" : ""}>
       {" "}
-      <td className="border border-gray-300 min-w-20 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">
+      <td className="border border-gray-300 min-w-10 max-w-15 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">
         {isMock ? (
           <div className="h-2 rounded bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
         ) : (
-          <img className={"max-w-15"} src={data?.img} />
+          <img className={"max-w-10 sm:max-w-15"} src={data?.img} />
         )}
       </td>{" "}
-      <td className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">
+      <td className="border border-gray-300 p-4 px-2 max-w-30 md:max-w-50  text-gray-500 dark:border-gray-700 dark:text-gray-400">
         {isMock ? (
           <div className="h-2 rounded bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
         ) : (
           data.name
         )}
       </td>{" "}
-      <td className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">
+      <td className="border border-gray-300 p-4 px-2 max-w-30 md:max-w-50 text-gray-500 dark:border-gray-700 dark:text-gray-400">
         {isMock ? (
           <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
         ) : (
           data.username
-        )}
-      </td>{" "}
-      <td className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">
-        {isMock ? (
-          <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
-        ) : (
-          data.email
         )}
       </td>{" "}
       <td className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">

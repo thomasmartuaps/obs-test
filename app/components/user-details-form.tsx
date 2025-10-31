@@ -26,7 +26,6 @@ export function UserDetailsForm({
   });
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log("CHANGING USER DATA TO SUBMIT");
     e.preventDefault();
     if (user) {
       setUser({
@@ -59,16 +58,16 @@ export function UserDetailsForm({
   return (
     <form ref={formRef} /* onChange={onChangeForm} */>
       <div className="space-y-12">
-        <div className="border-b border-white/10 pb-12">
-          <h2 className="text-base/7 font-semibold text-white">Profile</h2>
+        <div className="border-b border-white/10 mb-4 pb-4">
+          {/* <h2 className="text-base/7 font-semibold text-white">Profile</h2>
 
           <p className="mt-1 text-sm/6 text-gray-400">
             {id
               ? "View and edit user profile and information."
               : "Add new user information"}
-          </p>
+          </p> */}
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ">
+          <div className="mt-4 grid grid-cols-1 gap-x-4 sm:gap-x-8 gap-y-4 sm:grid-cols-4 ">
             <div className="sm:col-span-2">
               <label
                 htmlFor="username"
@@ -168,17 +167,17 @@ export function UserDetailsForm({
                 </div>
               </div>
             </div>
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ">
-              <div className="sm:col-span-4 mt-4">
-                <h2 className="text-base/7 font-semibold text-white">
+            <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ">
+              <div className="sm:col-span-4 mt-4 ">
+                <h2 className="text-base/7 font-semibold mb-4 text-white">
                   Profile Photo
                 </h2>
-                <img className={""} src={user?.img} />
+                <img className={"max-md:max-w-20"} src={user?.img} />
               </div>
             </div>
           </div>
         </div>
-        <div className="mt-6 flex items-center justify-start gap-x-6">
+        <div className="flex items-center justify-start">
           <Button buttonText={"Save"} color={"indigo"} onClick={onSubmit} />
         </div>
       </div>

@@ -55,7 +55,7 @@ export default function Userlist() {
   }, [usersData, setUserList]);
 
   return (
-    <div className="px-4 sm:px-8 not-prose rounded-lg bg-white outline outline-white/5 dark:bg-gray-950/50">
+    <div className="px-4 sm:px-8 not-prose rounded-lg bg-white dark:bg-gray-950/50">
       <table className="w-full border-collapse border border-gray-400 bg-white text-sm dark:border-gray-500 dark:bg-gray-800">
         {" "}
         <thead className="bg-gray-50 dark:bg-gray-700">
@@ -64,35 +64,28 @@ export default function Userlist() {
             {" "}
             <th className={tableHeadClass}>
               {userList.length === 0 ? (
-                <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
+                <div className="h-2 rounded bg-gray-200 px-2 dark:bg-gray-700"></div>
               ) : (
                 <></>
               )}
             </th>{" "}
             <th className={tableHeadClass}>
               {userList.length === 0 ? (
-                <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
+                <div className="h-2 rounded bg-gray-200 max-w-30 md:max-w-50  px-2 dark:bg-gray-700"></div>
               ) : (
                 "Name"
               )}
             </th>{" "}
             <th className={tableHeadClass}>
               {userList.length === 0 ? (
-                <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
+                <div className="h-2 rounded bg-gray-200 max-w-30 md:max-w-50  px-2 dark:bg-gray-700"></div>
               ) : (
                 "Username"
               )}
             </th>{" "}
             <th className={tableHeadClass}>
               {userList.length === 0 ? (
-                <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
-              ) : (
-                "Email"
-              )}
-            </th>{" "}
-            <th className={tableHeadClass}>
-              {userList.length === 0 ? (
-                <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
+                <div className="h-2 rounded bg-gray-200 max-w-30 md:max-w-50  px-2 dark:bg-gray-700"></div>
               ) : (
                 "Actions"
               )}

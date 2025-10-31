@@ -64,7 +64,7 @@ export function UserDetailsModal({ id, handleClose }: UserDetailsModalProps) {
   return (
     <div className="max-w-screen w-full space-y-6 " role="dialog">
       <div
-        className=" px-4 py-8 my-auto mx-auto sm:px-8 not-prose rounded-lg bg-white outline outline-white/5 dark:bg-gray-950/50"
+        className="max-h-800 px-4 py-8 my-auto mx-auto sm:px-8 md:px-12 lg:px-36 sm:py-8 not-prose rounded-lg bg-white dark:bg-gray-950/50"
         role="document"
       >
         <div className="w-full border-collapse border border-gray-400 bg-white text-sm dark:border-gray-500 dark:bg-gray-800">
