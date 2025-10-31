@@ -64,7 +64,7 @@ export function UserDetailsModal({ id, handleClose }: UserDetailsModalProps) {
   return (
     <div className="max-w-screen w-full space-y-6 " role="dialog">
       <div
-        className="max-h-800 px-4 py-8 my-auto mx-auto sm:px-8 md:px-12 lg:px-36 sm:py-8 not-prose rounded-lg bg-white dark:bg-gray-950/50"
+        className="max-h-800 px-4 py-8 my-auto mx-auto sm:px-8 md:px-12 lg:px-36 sm:py-8 not-prose rounded-lg"
         role="document"
       >
         <div className="w-full border-collapse border border-gray-400 bg-white text-sm dark:border-gray-500 dark:bg-gray-800">
@@ -93,10 +93,22 @@ export function UserDetailsModal({ id, handleClose }: UserDetailsModalProps) {
           aria-labelledby="child-modal-title"
           aria-describedby="child-modal-description"
         >
-          <div>
-            <p>are you sure you want to delete this user?</p>
-            <Button buttonText={"Yes"} color="red" onClick={handleDelete} />
-            <Button buttonText={"No"} color="indigo" onClick={cancelDelete} />
+          <div className="flex items-center justify-center">
+            <div className="my-75 sm:my-50 mx-auto sm:px-8 md:px-12 lg:px-36 sm:py-8 not-prose rounded-lg ">
+              <div className="border border-gray-300 p-4 text-left font-semibold text-gray-900 dark:border-gray-600 dark:text-gray-200 flex flex-col md:flex-row space-x-0 md:space-x-2 bg-gray-50 dark:bg-gray-700">
+                <h5 className="modal-title">
+                  Are you sure you want to delete this user?
+                </h5>
+              </div>
+              <div className="w-half space-x-6 px-4 py-8 border border-gray-300 p-4 border-gray-400 bg-white text-sm dark:border-gray-500 dark:bg-gray-800 text-gray-500 dark:border-gray-700 dark:text-gray-400 border-b border-white/10 mb-4 pb-4">
+                <Button buttonText={"Yes"} color="red" onClick={handleDelete} />
+                <Button
+                  buttonText={"No"}
+                  color="indigo"
+                  onClick={cancelDelete}
+                />
+              </div>
+            </div>
           </div>
         </Modal>
       </div>
