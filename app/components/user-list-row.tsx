@@ -9,6 +9,7 @@ interface UserListRowProps {
     name: string;
     username: string;
     email: string;
+    img?: string;
   };
   isMock?: boolean;
 }
@@ -25,6 +26,13 @@ export function UserListRow({ data, isMock }: UserListRowProps) {
   return (
     <tr className={isMock ? "animate-pulse" : ""}>
       {" "}
+      <td className="border border-gray-300 min-w-20 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">
+        {isMock ? (
+          <div className="h-2 rounded bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
+        ) : (
+          <img className={"max-w-15"} src={data?.img} />
+        )}
+      </td>{" "}
       <td className="border border-gray-300 p-4 text-gray-500 dark:border-gray-700 dark:text-gray-400">
         {isMock ? (
           <div className="h-2 rounded bg-gray-200 dark:bg-gray-700 animate-pulse"></div>

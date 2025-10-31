@@ -14,13 +14,15 @@ export function UserDetailsForm({
 }: UserDetailsFormProps) {
   const formRef = useRef<HTMLFormElement | null>(null);
   const usersData = useAppSelector((state) => state.users);
+  const newId = Math.max(...usersData.users.map((val) => val.id)) + 1;
   const [user, setUser] = useState<User>({
-    id: Math.max(...usersData.users.map((val) => val.id)) + 1,
+    id: newId,
     name: "",
     username: "",
     email: "",
     phone: "",
     website: "",
+    img: `https://picsum.photos/id/${newId}/100/150.jpg`,
   });
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -164,6 +166,14 @@ export function UserDetailsForm({
                     className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                   />
                 </div>
+              </div>
+            </div>
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ">
+              <div className="sm:col-span-4 mt-4">
+                <h2 className="text-base/7 font-semibold text-white">
+                  Profile Photo
+                </h2>
+                <img className={""} src={user?.img} />
               </div>
             </div>
           </div>

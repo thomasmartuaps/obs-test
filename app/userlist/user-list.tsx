@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Button } from "~/components/button";
 import { UserListRow } from "~/components/user-list-row";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import type { User } from "~/store/reducers";
@@ -63,6 +62,13 @@ export default function Userlist() {
           {" "}
           <tr>
             {" "}
+            <th className={tableHeadClass}>
+              {userList.length === 0 ? (
+                <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
+              ) : (
+                <></>
+              )}
+            </th>{" "}
             <th className={tableHeadClass}>
               {userList.length === 0 ? (
                 <div className="h-2 rounded bg-gray-200 dark:bg-gray-700"></div>
