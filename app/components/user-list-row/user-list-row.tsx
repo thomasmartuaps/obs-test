@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "./button";
+import { Button } from "../button/button";
 import { Modal } from "@mui/material";
-import { UserDetailsModal } from "./user-details-modal";
+import { UserDetailsModal } from "../user-details-modal/user-details-modal";
 
 interface UserListRowProps {
   data: {

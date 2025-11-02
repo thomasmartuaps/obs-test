@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UserListRow } from "~/components/user-list-row";
+import { UserListRow } from "~/components/user-list-row/user-list-row";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import type { User } from "~/store/reducers";
 

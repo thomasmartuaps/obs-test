@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useAppSelector } from "~/store/hooks";
 import type { User } from "~/store/reducers";
-import { Button } from "./button";
+import { Button } from "../button/button";
 
 interface UserDetailsFormProps {
   id?: number;
@@ -50,23 +50,10 @@ export function UserDetailsForm({
     }
   }, [id, setUser, usersData]);
 
-  /*   function onChangeForm(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    console.log(e.target, "HI");
-  } */
-
   return (
-    <form ref={formRef} /* onChange={onChangeForm} */>
+    <form ref={formRef}>
       <div className="space-y-12">
         <div className="border-b border-white/10 mb-4 pb-4">
-          {/* <h2 className="text-base/7 font-semibold text-white">Profile</h2>
-
-          <p className="mt-1 text-sm/6 text-gray-400">
-            {id
-              ? "View and edit user profile and information."
-              : "Add new user information"}
-          </p> */}
-
           <div className="mt-4 grid grid-cols-1 gap-x-4 sm:gap-x-8 gap-y-4 sm:grid-cols-4 ">
             <div className="sm:col-span-2">
               <label

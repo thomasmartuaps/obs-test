@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
-import { Button } from "./button";
-import { UserDetailsForm } from "./user-details-form";
+import { Button } from "../button/button";
+import { UserDetailsForm } from "../user-details-form/user-details-form";
 import type { User } from "~/store/reducers";
 import { useAppDispatch } from "~/store/hooks";
 import { Modal } from "@mui/material";

@@ -1,7 +1,7 @@
 import Userlist from "~/userlist/user-list";
 import logo from "./obs-logo.png";
-import { Button } from "~/components/button";
-import { UserDetailsModal } from "~/components/user-details-modal";
+import { Button } from "~/components/button/button";
+import { UserDetailsModal } from "~/components/user-details-modal/user-details-modal";
 import { Modal } from "@mui/material";
 import { useState } from "react";
 import { useAppSelector } from "~/store/hooks";
